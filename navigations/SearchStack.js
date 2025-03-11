@@ -7,7 +7,7 @@ export default function SearchStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="search"
+        name="search-stack"
         component={Search}
         options={{ title: "Buscar" }}
       />

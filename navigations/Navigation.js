@@ -5,17 +5,54 @@ import AccountStack from "./AccountStack";
 import FavoritesStack from "./FavoritesStack";
 import SearchStack from "./SearchStack";
 import TopRestaurantsStack from "./TopRestaurantsStack";
+import { Icon } from "@rneui/themed";
 
 const Tab = createBottomTabNavigator();
 
 export default function Navigation() {
+  const screenOptions = (route, color) => {
+    let iconName = "";
+    switch (route.name) {
+      case "restaurants":
+        iconName = "compass-outline";
+        break;
+      case "favorites":
+        iconName = "heart-outline";
+        break;
+      case "top-restaurants":
+        iconName = "star-outline";
+        break;
+      case "search":
+        iconName = "magnify";
+        break;
+      case "account":
+        iconName = "home-outline";
+        break;
+
+      default:
+        break;
+    }
+
+    return (
+      <Icon type="material-community" name={iconName} size={22} color={color} />
+    );
+  };
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        initialRouteName="restaurants"
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color }) => screenOptions(route, color),
+          tabBarActiveTintColor: "#ff0000", // Color cuando está activo
+          headerShown: false,
+        })}
+      >
         <Tab.Screen
           name="restaurants"
           component={RestaurantsStack}
-          options={{ title: "Restaurantes" }}
+          options={{
+            title: "Restaurantes",
+          }}
         />
         <Tab.Screen
           name="account"
